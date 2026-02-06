@@ -8,7 +8,7 @@ const server = () => {
     app.listen(port, () => {
       console.log(`Server is running on http://localhost:${port}`);
     });
-  } catch (error: any) {
+  } catch (error) {
     console.log(error);
     process.exit(1);
   }

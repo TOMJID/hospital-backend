@@ -10,20 +10,26 @@
     "start": "node dist/server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "tomjid",
   "license": "ISC",
+  "type": "module",
   "packageManager": "pnpm@10.28.1",
   "dependencies": {
-    "dotenv": "^17.2.4",
+    "@prisma/adapter-pg": "^7.3.0",
+    "@prisma/client": "^7.3.0",
     "express": "^5.2.1",
+    "pg": "^8.18.0",
     "tsx": "^4.21.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.2",
     "@types/express": "^5.0.6",
     "@types/node": "^25.2.1",
+    "@types/pg": "^8.16.0",
+    "dotenv": "^17.2.4",
     "eslint": "^9.39.2",
     "nodemon": "^3.1.11",
+    "prisma": "^7.3.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.54.0"

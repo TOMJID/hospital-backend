@@ -1,20 +1,17 @@
-import express, { Application, Request, Response } from "express";
+import "dotenv/config";
+import app from "./app";
 
-const app: Application = express();
-const port = 3000; // The port your express server will be running on.
+const port = process.env.PORT;
 
-// Enable URL-encoded form data parsing
-app.use(express.urlencoded({ extended: true }));
+const server = () => {
+  try {
+    app.listen(port, () => {
+      console.log(`Server is running on http://localhost:${port}`);
+    });
+  } catch (error: any) {
+    console.log(error);
+    process.exit(1);
+  }
+};
 
-// Middleware to parse JSON bodies
-app.use(express.json());
-
-// Basic route
-app.get("/", (req: Request, res: Response) => {
-  res.send("Hello, TypeScript + Express!");
-});
-
-// Start the server
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
+server();

@@ -10,6 +10,6 @@
     "skipLibCheck": true,
     "ignoreDeprecations": "5.0"
   },
-  "include": ["src/**/*", "prisma/**/*"],
-  "exclude": ["node_modules", "dist", "generated/prisma"]
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
 }

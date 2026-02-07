@@ -18,10 +18,11 @@
   "author": "tomjid",
   "license": "ISC",
   "type": "module",
-  "packageManager": "pnpm@10.28.1",
+  "packageManager": "pnpm@10.28.2",
   "dependencies": {
     "@prisma/adapter-pg": "^7.3.0",
     "@prisma/client": "^7.3.0",
+    "better-auth": "^1.4.18",
     "express": "^5.2.1",
     "pg": "^8.18.0",
     "tsx": "^4.21.0"

@@ -1,8 +1,9 @@
 import "dotenv/config";
 import app from "./app";
 import { prisma } from "./app/lib/prisma";
+import { envVars } from "./app/config/env";
 
-const port = process.env.PORT;
+const port = envVars.PORT;
 
 const server = async () => {
   try {

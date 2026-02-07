@@ -3,7 +3,7 @@ model Doctor {
   userId        String  @unique
   name          String
   email         String  @unique
-  prfilePhoto   String?
+  profilePhoto  String?
   contactNumber String?
   address       String
 

@@ -30,6 +30,7 @@ pnpm-lock.yaml # Keep this if using pnpm
 dist/
 build/
 coverage/
+src/generated
 
 # ----------------------
 # OS & Editor Configs
@@ -39,7 +40,5 @@ Thumbs.db
 .idea/
 .vscode/
 *.swp
-/generated/prisma
 .vercel
 
-/generated/prisma

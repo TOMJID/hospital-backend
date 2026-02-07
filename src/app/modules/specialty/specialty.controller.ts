@@ -2,13 +2,14 @@ import { Request, Response } from "express";
 import { SpecialtyService } from "./specialty.service";
 import catchAsync from "../../share/catchAsync";
 import sendResponse from "../../share/sendResponse";
+import status from "http-status";
 
 //* Create Specialty */
 const createSpecialty = catchAsync(async (req: Request, res: Response) => {
   const payload = req.body;
   const result = await SpecialtyService.createSpecialty(payload);
   sendResponse(res, {
-    httpStatusCode: 201,
+    httpStatusCode: status.CREATED,
     success: true,
     message: "Specialty created successfully",
     data: result,
@@ -19,7 +20,7 @@ const createSpecialty = catchAsync(async (req: Request, res: Response) => {
 const getAllSpecialty = catchAsync(async (req: Request, res: Response) => {
   const result = await SpecialtyService.getAllSpecialty();
   sendResponse(res, {
-    httpStatusCode: 200,
+    httpStatusCode: status.OK,
     success: true,
     message: "Specialty retrieved successfully",
     data: result,
@@ -31,7 +32,7 @@ const getSpecialtyById = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
   const result = await SpecialtyService.getSpecialtyById(id as string);
   sendResponse(res, {
-    httpStatusCode: 200,
+    httpStatusCode: status.OK,
     success: true,
     message: "Specialty retrieved successfully",
     data: result,
@@ -44,7 +45,7 @@ const updateSpecialty = catchAsync(async (req: Request, res: Response) => {
   const payload = req.body;
   const result = await SpecialtyService.updateSpecialty(id as string, payload);
   sendResponse(res, {
-    httpStatusCode: 200,
+    httpStatusCode: status.OK,
     success: true,
     message: "Specialty updated successfully",
     data: result,
@@ -56,7 +57,7 @@ const deleteSpecialty = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
   const result = await SpecialtyService.deleteSpecialtyById(id as string);
   sendResponse(res, {
-    httpStatusCode: 200,
+    httpStatusCode: status.OK,
     success: true,
     message: "Specialty deleted successfully",
     data: result,

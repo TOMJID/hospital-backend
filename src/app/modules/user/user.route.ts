@@ -1,59 +1,13 @@
-import { NextFunction, Request, Response, Router } from "express";
+import { Router } from "express";
 import { UserController } from "./user.controller";
-import z from "zod";
-import { UserGender } from "../../../generated/prisma/enums";
+import validateRequestInput from "../../middlewares/validateRequestInput";
+import { createDoctorZodSchema } from "./user.validation";
 
 const router = Router();
 
-const createDoctorZodSchema = z.object({
-  password: z
-    .string("password is required")
-    .min(6, "password must be at least 6 characters long"),
-  doctor: z.object({
-    name: z
-      .string("name is required")
-      .max(36, "name must be under 36 characters"),
-    email: z.email("invalid email address"),
-    contactNumber: z
-      .string("contact number is required")
-      .min(11, "contact number must be 11 digits")
-      .max(14, "contact number must be under 14 digits"),
-    address: z
-      .string("address isn't valid")
-      .max(100, "address is too long it must be under 100 characters")
-      .optional(),
-    registrationNumber: z.string("registration number is required"),
-    experience: z
-      .int("experience must be in number")
-      .nonnegative("Experience can't be negative")
-      .optional(),
-    gender: z.enum(
-      [UserGender.MALE, UserGender.FEMALE, UserGender.OTHER],
-      "Gender must be one of FEMALE, MALE, OTHER",
-    ),
-    appointmentFee: z
-      .number("Appointment fee is required")
-      .nonnegative("Appointment fee can't be negative"),
-    qualifications: z.array(z.string("Qualifications are required")),
-    currentWorkingPlace: z.string("Current working place is required"),
-    designation: z.string("Designation is required"),
-  }),
-  specialties: z.array(z.uuid(), "Specialties are required"),
-});
-
 router.post(
   "/create-doctor",
-  (req: Request, res: Response, next: NextFunction) => {
-    const parsedResult = createDoctorZodSchema.safeParse(req.body);
-
-    if (!parsedResult.success) {
-      next(parsedResult.error);
-    }
-
-    //? statalizing the data
-    req.body = parsedResult.data;
-    next();
-  },
+  validateRequestInput(createDoctorZodSchema),
   UserController.createDoctor,
 );
 

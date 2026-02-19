@@ -1,5 +1,7 @@
+import status from "http-status";
 import { Specialty } from "../../../generated/prisma/client";
 import { prisma } from "../../lib/prisma";
+import AppError from "../../errorHelper/appError";
 
 //* Create Specialty */
 const createSpecialty = async (payload: Specialty) => {
@@ -8,7 +10,10 @@ const createSpecialty = async (payload: Specialty) => {
       data: payload,
     });
   } catch (error: unknown) {
-    throw new Error((error as Error).message);
+    throw new AppError(
+      status.INTERNAL_SERVER_ERROR,
+      (error as Error).message || "Failed to create specialty",
+    );
   }
 };
 
@@ -17,7 +22,10 @@ const getAllSpecialty = async () => {
   try {
     return await prisma.specialty.findMany();
   } catch (error: unknown) {
-    throw new Error((error as Error).message);
+    throw new AppError(
+      status.INTERNAL_SERVER_ERROR,
+      (error as Error).message || "Failed to fetch specialties",
+    );
   }
 };
 
@@ -30,7 +38,10 @@ const getSpecialtyById = async (id: string) => {
       },
     });
   } catch (error: unknown) {
-    throw new Error((error as Error).message);
+    throw new AppError(
+      status.INTERNAL_SERVER_ERROR,
+      (error as Error).message || "Failed to fetch specialty",
+    );
   }
 };
 
@@ -44,7 +55,10 @@ const updateSpecialty = async (id: string, payload: Partial<Specialty>) => {
       data: payload,
     });
   } catch (error: unknown) {
-    throw new Error((error as Error).message);
+    throw new AppError(
+      status.INTERNAL_SERVER_ERROR,
+      (error as Error).message || "Failed to update specialty",
+    );
   }
 };
 
@@ -57,7 +71,10 @@ const deleteSpecialtyById = async (id: string) => {
       },
     });
   } catch (error: unknown) {
-    throw new Error((error as Error).message);
+    throw new AppError(
+      status.INTERNAL_SERVER_ERROR,
+      (error as Error).message || "Failed to delete specialty",
+    );
   }
 };
 

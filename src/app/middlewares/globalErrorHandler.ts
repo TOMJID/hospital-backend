@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { envVars } from "../config/env";
 import status from "http-status";
 import z from "zod";
+import AppError from "../errorHelper/appError";
 
 export const globalErrorHandler = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -33,6 +34,15 @@ export const globalErrorHandler = (
     });
 
     error = "Validation Error";
+  } else if (err instanceof AppError) {
+    statusCode = err.statusCode;
+    message = err.message;
+    error = err.message;
+    errorSource.push({
+      path: "root error form AppError",
+      message: err.message,
+      code: err.statusCode.toString(),
+    });
   } else if (err instanceof Error) {
     message = err.message;
     error =

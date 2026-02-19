@@ -3,6 +3,7 @@ import catchAsync from "../../share/catchAsync";
 import sendResponse from "../../share/sendResponse";
 import status from "http-status";
 import { DoctorService } from "./doctor.service";
+import AppError from "../../errorHelper/appError";
 
 //? gets all doctors
 const getAllDoctors = catchAsync(async (req: Request, res: Response) => {
@@ -20,7 +21,7 @@ const getDoctorById = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
 
   if (!id) {
-    throw new Error("Doctor id is required");
+    throw new AppError(status.BAD_REQUEST, "Doctor id is required");
   }
   const result = await DoctorService.getDoctorById(id as string);
   sendResponse(res, {
@@ -36,7 +37,7 @@ const updateDoctor = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
   const payload = req.body;
   if (!id) {
-    throw new Error("Doctor id is required");
+    throw new AppError(status.BAD_REQUEST, "Doctor id is required");
   }
 
   const result = await DoctorService.updateDoctor(id as string, payload);
@@ -52,7 +53,7 @@ const updateDoctor = catchAsync(async (req: Request, res: Response) => {
 const softDeleteDoctor = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
   if (!id) {
-    throw new Error("Doctor id is required");
+    throw new AppError(status.BAD_REQUEST, "Doctor id is required");
   }
   const result = await DoctorService.softDeleteDoctor(id as string);
   sendResponse(res, {

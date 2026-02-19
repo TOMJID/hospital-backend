@@ -6,7 +6,7 @@ const validateRequestInput = (zodObject: z.ZodObject) => {
     const parsedResult = zodObject.safeParse(req.body);
 
     if (!parsedResult.success) {
-      next(parsedResult.error);
+      return next(parsedResult.error);
     }
 
     //? statalizing the data

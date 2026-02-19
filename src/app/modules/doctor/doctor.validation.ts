@@ -29,4 +29,5 @@ export const updateDoctorZodSchema = z
     currentWorkingPlace: z.string("Current working place is required"),
     designation: z.string("Designation is required"),
   })
-  .partial();
+  .partial()
+  .strict();

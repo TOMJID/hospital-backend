@@ -26,10 +26,7 @@ export const globalErrorHandler = (
 
     err.issues.forEach((issue) => {
       errorSource.push({
-        path:
-          issue.path.length > 1
-            ? issue.path.join(" -> ")
-            : issue.path[0].toString(),
+        path: issue.path.join(" -> ") || "root",
         message: issue.message,
         code: issue.code,
       });
